@@ -1,0 +1,20 @@
+
+
+ext.localProjectMap = loadLocalProperties()
+if(ext.localProjectMap != null){
+    def projects = ext.localProjectMap.get("local_project") // read key-value from Properties
+    println("$projects")
+}
+
+// load local.properties into Properties
+Properties loadLocalProperties() {
+    def properties = new Properties()
+    File file = new File(rootDir, "local.properties")
+    if (file.exists()) {
+        properties.load(file.newDataInputStream())
+        if ("true" == properties.getProperty("local_compile")) {
+            return properties
+        }
+    }
+    return null
+}
