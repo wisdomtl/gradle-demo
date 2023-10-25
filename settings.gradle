@@ -12,6 +12,7 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
+apply from: "${rootDir}/local_dependency.gradle" //root dir
 rootProject.name = "gradle-demo"
 include ':app'
 include ':pb'

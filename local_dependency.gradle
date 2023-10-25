@@ -2,8 +2,12 @@
 
 ext.localProjectMap = loadLocalProperties()
 if(ext.localProjectMap != null){
-    def projects = ext.localProjectMap.get("local_project") // read key-value from Properties
-    println("$projects")
+    def projectStrings = ext.localProjectMap.get("local_project") // read key-value from Properties
+    println("$projectStrings")
+    def projects = projectStrings.split(",")
+    for(def project: projects){
+        println("$project")
+    }
 }
 
 // load local.properties into Properties
