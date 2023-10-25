@@ -8,6 +8,8 @@ if(ext.localProjectMap != null){
     for(def project: projects){
         println("$project")
     }
+    def baseDir = "${rootDir.parent}"// parent dir of project
+    println("$baseDir")
 }
 
 // load local.properties into Properties
