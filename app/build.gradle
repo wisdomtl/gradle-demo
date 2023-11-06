@@ -32,6 +32,9 @@ android {
     }
 }
 
+//case: read global attribute
+println("read gradle.ext.localProject=${gradle.ext.localProject} in app")
+
 dependencies {
 
     implementation 'androidx.core:core-ktx:1.8.0'

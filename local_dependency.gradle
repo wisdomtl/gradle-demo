@@ -1,19 +1,25 @@
-ext.localPropertiesMap = loadLocalProperties()
-ext.localProjectsMap = new HashMap<String, String>()
-if (ext.localPropertiesMap != null) {
-    def projectStrings = ext.localPropertiesMap.get("local_project")
-    // read key-value from Properties
-    println("$projectStrings")
-    def projects = projectStrings.split(",")
-    for (def project : projects) {
-        println("load project:$project")
-        ext.localProjectsMap.put(":$project",project)// keep project name in map
-    }
-    def baseDir = "${rootDir.parent}"// parent dir of project
-    println("$baseDir")
-}
+//case: define global attribute
+gradle.ext.localProject = []
 
-// load local.properties into Properties
+
+
+def projectStrings = loadLocalProperties().get("local_project")
+// read key-value from Properties
+println("$projectStrings")
+def projects = projectStrings.split(",")
+for (def project : projects) {
+    println("load project:$project")
+    gradle.ext.localProject << project//case: append item to list
+}
+//case: read global attribute
+println("gradle.ext.localProject=${gradle.ext.localProject}")
+
+
+//case: parent dir of project
+def baseDir = "${rootDir.parent}"
+println("$baseDir")
+
+//case: load local.properties into Properties
 Properties loadLocalProperties() {
     def properties = new Properties()
     File file = new File(rootDir, "local.properties")
