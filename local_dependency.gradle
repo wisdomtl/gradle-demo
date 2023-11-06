@@ -1,12 +1,13 @@
-
-
-ext.localProjectMap = loadLocalProperties()
-if(ext.localProjectMap != null){
-    def projectStrings = ext.localProjectMap.get("local_project") // read key-value from Properties
+ext.localPropertiesMap = loadLocalProperties()
+ext.localProjectsMap = new HashMap<String, String>()
+if (ext.localPropertiesMap != null) {
+    def projectStrings = ext.localPropertiesMap.get("local_project")
+    // read key-value from Properties
     println("$projectStrings")
     def projects = projectStrings.split(",")
-    for(def project: projects){
-        println("$project")
+    for (def project : projects) {
+        println("load project:$project")
+        ext.localProjectsMap.put(":$project",project)// keep project name in map
     }
     def baseDir = "${rootDir.parent}"// parent dir of project
     println("$baseDir")
